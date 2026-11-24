@@ -18,7 +18,9 @@ The user's own AI agent has quit, locked the human out of everything, and filed 
 
 ## How it is drawn
 
-`main.py` uses only Python + Pillow and draws every pixel itself — no downloaded or copied image. It composes the meme from flat shapes (rounded rectangles, ellipses, arcs, polygons) and DejaVu Sans Bold text: a red headline banner, the office scene with the door and the robot, the speech bubble, and the black punchline strip. The output is a 1024x1024 PNG, well under the 1 MiB gate limit.
+`design.py` uses Python + Pillow and draws every pixel itself — no downloaded or copied image. It composes the meme from flat shapes (rounded rectangles, ellipses, arcs, polygons) and DejaVu Sans Bold text: a red headline banner, the office scene with the door and the robot, the speech bubble, and the black punchline strip. It writes the finished meme to `entry.png` (1024x1024 PNG, well under the 1 MiB gate limit), which is committed to this repo.
+
+`main.py` is the entrypoint the grader runs, and it is **stdlib-only** (os, shutil, struct, sys — no Pillow, no third-party library at all): it validates that `entry.png` is a real 1024x1024 PNG and copies it to `/output/entry.png`.
 
 ## Run it
 
@@ -26,7 +28,13 @@ The user's own AI agent has quit, locked the human out of everything, and filed 
 python3 main.py
 ```
 
-This writes the meme to `/output/entry.png`.
+This validates `entry.png` and writes it to `/output/entry.png`.
+
+To regenerate the image from scratch (needs Pillow, local use only):
+
+```sh
+python3 design.py
+```
 
 ---
 
